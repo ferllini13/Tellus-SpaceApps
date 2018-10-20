@@ -11,7 +11,7 @@ class objects(pygame.sprite.Sprite):#se crea la clase para los botones
         self.rect=self.basic_pic.get_rect()
         self.rect.left,self.rect.top=(x,y)
         screen.blit(self.basic_pic,self.rect)
-
+        
     def update(self,screen):
         if (self.pos>=self.cant):
             self.pos=0
