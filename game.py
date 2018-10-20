@@ -1,4 +1,5 @@
 import pygame
+import time
 import sys
 import string
 from pygame.locals import *
@@ -6,7 +7,7 @@ from pygame.locals import *
 from pygameGUI.cursor import cursor
 from pygameGUI.button import button
 from pygameGUI.loadImage import loadImage
-from logic.card import card
+from logic.object import object
 
 pygame.mixer.init()
 #pygame.mixer.music.load("sound.mp3")
@@ -23,28 +24,28 @@ def main():
     
 
     #definiciones
-    wallp = loadImage("fondo1.jpg",1)
-    #wallp=pygame.image.load("fondo1.jpg").convert()
-    ready=loadImage("ready.png")
-    ready2=loadImage("ready2.png")
-    p=loadImage("p1.png")
-    bready=button(ready,ready2,400,30)
-    p1=card(p,p)
+    wallp=loadImage("backgrounds/f1.jpg",1)
+    x=0
+    y=0
+    t1=loadImage("sprites/1.png")
+    t2=loadImage("sprites/2.png")
+    t3=loadImage("sprites/3.png")
+    t4=loadImage("sprites/4.png")
+    t5=loadImage("sprites/5.png")
+    t6=loadImage("sprites/6.png")
+
+    tt=[t1,t2,t3,t4,t5,t6]
+    
+    p1=objects(tt,5)
 
     x=0
     y=0
-    flawDown = 0
-    counter = 0
-    posInit = None
-    posEnd = None
     while True:
         screen.blit(wallp,(0,0))
         p1.put(screen,x,y)
         myCursor.update()
-        bready.update(screen,myCursor)
         
         events=pygame.event.get()
-
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key==K_DOWN:
@@ -59,16 +60,12 @@ def main():
                 if event.key==K_RIGHT:
                     x=x+100
                     p1.put(screen,x,y)
-            if event.type == pygame.MOUSEBUTTONUP:
-                counter += counter                
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                counter += 1
-                if(counter == 3):
-                    counter = 0
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+        p1.update(screen)
         pygame.display.flip()
+        time.sleep(0.07)
 
 main()
