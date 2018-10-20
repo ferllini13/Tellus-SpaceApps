@@ -7,7 +7,7 @@ from pygame.locals import *
 from pygameGUI.cursor import cursor
 from pygameGUI.button import button
 from pygameGUI.loadImage import loadImage
-from logic.object import object
+from logic.objects import objects
 
 pygame.mixer.init()
 #pygame.mixer.music.load("sound.mp3")
