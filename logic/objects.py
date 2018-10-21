@@ -7,10 +7,10 @@ class attack(pygame.sprite.Sprite):
     tattack=[]
     battack=[]
     instances = []
+    state=True
     pics = None 
     cant = None
     pos = None
-    state = None
     type = None
 
     def __init__(self,pics,cant,pType=0):#se define cada boton con dos imagenes y las coordenadas
@@ -18,7 +18,6 @@ class attack(pygame.sprite.Sprite):
         self.pics=pics
         self.cant=cant
         self.pos=0
-        self.state=False
         self.type = pType
         self.basic_pic=pics[self.pos] #se define una imagen bacica qie inicia como la no seleccionada
         self.tattack=[(1036 , 180),
@@ -61,12 +60,12 @@ class attack(pygame.sprite.Sprite):
 
     def put(self,screen, xy):
         self.rect=self.basic_pic.get_rect()
-        self.rect.left,self.rect.top= xy
+        self.rect.center= xy
         screen.blit(self.basic_pic,self.rect)
 
     def move(self,screen):
         if (self.poss>=len(self.battack)-1):
-            self.state = False
+            self.state=False
             self.put(screen,(2000,2000))    
         else:
             self.poss=self.poss+1    
@@ -98,7 +97,7 @@ class objects(pygame.sprite.Sprite):#se crea la clase para los botones
   
     def put(self,screen,x,y):
         self.rect=self.basic_pic.get_rect()
-        self.rect.left,self.rect.top=(x,y)
+        self.rect.center=(x,y)
         screen.blit(self.basic_pic,self.rect)
 
     def update(self,screen):

@@ -7,6 +7,7 @@ def loadImage(pImageName, pWallPaperFlag = 0):
     try:
         if(pWallPaperFlag):
             tmpImage = pygame.image.load(pImageName).convert()
+            
         else:
             tmpImage = pygame.image.load(pImageName)
         return tmpImage

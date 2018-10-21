@@ -37,7 +37,6 @@ def main():
     p1=objects(tt,5,3)
     p2=objects(tt,0,0)
     p3=objects(tt,3,4)
-    p4=attack(tt,5,4)
 
     p1.put(screen,0,0)
     p2.put(screen,100,100)
@@ -50,7 +49,8 @@ def main():
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key==K_DOWN:
-                    p4.state = True
+                    p4=attack(tt,5,4)
+                    
             if event.type==pygame.MOUSEBUTTONDOWN:
                 for obj in objects.instances:
                     if myCursor.colliderect(obj.rect):
@@ -61,7 +61,7 @@ def main():
                 pygame.quit()
                 sys.exit()
         for obj in attack.instances:
-            if(obj.state): obj.move(screen)
+            if(obj.state):obj.move(screen)
         for obj in objects.instances:
             obj.update(screen)
             obj.move(screen, myCursor)
