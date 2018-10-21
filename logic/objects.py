@@ -20,35 +20,11 @@ class attack(pygame.sprite.Sprite):
         self.pos=0
         self.type = pType
         self.basic_pic=pics[self.pos] #se define una imagen bacica qie inicia como la no seleccionada
-        self.tattack=[(1036 , 180),
-            (1009 , 171) ,
-            (979 , 162),
-            (950 , 153),
-            (924 , 148),
-            (892 , 146),
-            (864 , 147),
-            (836 , 149),
-            (808 , 153),
-            (776 , 160),
-            (748 , 168),
-            (720 , 179) ,
-            (697 , 191),
-            (663 , 210),
-            (638 , 229),
-            (6167 , 246),
-            (598 , 267),
-            (582 , 292),
-            (572 , 316),
-            (562 , 343),
-            (561 , 367),
-            (560 , 392),
-            (564 , 418),
-            (577 , 448),
-            (592 , 475),
-            (625 , 450),
-            (623 , 521),
-            (646 , 540),
-            (669 , 553)]
+        self.tattack=[(1036 , 180),(1009 , 171),(979 , 162),(950 , 153),(924 , 148),
+            (892 , 146),(864 , 147),(836 , 149),(808 , 153),(776 , 160),(748 , 168),
+            (720 , 179) ,(697 , 191),(663 , 210),(638 , 229),(6167 , 246),(598 , 267),
+            (582 , 292),(572 , 316),(562 , 343),(561 , 367),(560 , 392),(564 , 418),
+            (577 , 448),(592 , 475),(625 , 450),(623 , 521),(646 , 540),(669 , 553)]
 
         self.battack=[(700 , 579),(725 , 590),(755 , 600),(784 , 610),(810 , 616),
             (842 , 620),(869 , 621),(897 , 619),(925 , 616),(958 , 610),(986 , 604),
@@ -117,3 +93,15 @@ class objects(pygame.sprite.Sprite):#se crea la clase para los botones
     def delete(self,instances):
         instances.remove(self)
         del self
+
+
+class score(pygame.sprite.Sprite):
+    def __init__(self,):
+        self.myFont=pygame.font.SysFont('Comic Sans MS', 30)
+    
+    def put(self,screen,score,xy):
+        textsurface = self.myFont.render("Score: " +str(score), False, (0, 0, 0))
+        screen.blit(textsurface,xy)
+
+
+#class card(pygame.sprite.Sprite)
