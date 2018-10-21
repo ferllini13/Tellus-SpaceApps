@@ -120,12 +120,16 @@ def main():
     sun=objects(ss,5,3)
     sun.put(screen,872,375)
     
+    
+    boom=loadImage("planets/exp.png")
+    now=False
+    now2=False
     while True:
         screen.blit(wallp,(0,0))
         c1=pygame.draw.circle(screen, (0,0,0),(761 , 381),15, 3)
         c2=pygame.draw.circle(screen, (0,0,0),(682 , 572), 15, 3)
         myCursor.update()
-        now=False
+        
         events=pygame.event.get()
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -173,14 +177,26 @@ def main():
         for obj in attack.instances:
             if(obj.state):obj.move(screen)
             if(obj.rect.colliderect(rightPlanet1.rect)):
-                rightPlanet1.put(screen,1048,485)
-                obj.delete(obj.instances)
-                now =True
+                screen.blit(boom,obj.rect)
+                pygame.display.flip()
+                screen.blit(boom,(obj.rect))
+                time.sleep(0.1)
+                if now:
+                    rightPlanet1.put(screen,1007,339)
+                    obj.delete(obj.instances)
+                    now =False
+                else:
+                    rightPlanet1.put(screen,1048,485)
+                    obj.delete(obj.instances)
+                    listCardPosIzqCheck[0] = 0
+                    now =True
+                
         for obj in objects.instances:
             obj.update(screen,myCursor)
             obj.move(screen, myCursor)
-            if now and obj.type!=3:
-                obj.put(screen,722,329)        
+            if now and obj.type!=3 and not now2:
+                obj.put(screen,722,329)
+                now2=True
         pygame.display.flip()
         time.sleep(0.07)
 
