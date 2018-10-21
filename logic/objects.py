@@ -70,18 +70,72 @@ class objects(pygame.sprite.Sprite):#se crea la clase para los botones
         self.state=False
         self.type = pType
         self.basic_pic=pics[self.pos] #se define una imagen bacica qie inicia como la no seleccionada
+        self.rect=self.basic_pic.get_rect()
   
     def put(self,screen,x,y):
         self.rect=self.basic_pic.get_rect()
         self.rect.center=(x,y)
         screen.blit(self.basic_pic,self.rect)
 
-    def update(self,screen):
+    def update(self,screen,cursor):
+        if (self.pos>=self.cant and self.type ==3):
+            self.pos=0
+        elif(self.pos>=self.cant and self.type ==1):
+            self.pos = self.pos
+        else:
+
+            self.pos=self.pos+1
+        self.basic_pic=self.pics[self.pos]
+        screen.blit(self.basic_pic,self.rect)
+
+    def move(self, screen, cursor):
+        if (self.state):
+            x,y = self.rect.center    
+            self.put(screen,x,y)
+    
+    def delete(self,instances):
+        instances.remove(self)
+        del self
+
+
+class cards(pygame.sprite.Sprite):#se crea la clase para los botones
+    instances=[]
+    pics = None 
+    cant = None
+    pos = None
+    state = None
+    type = None
+    index = None
+
+    def __init__(self,pics,cant,pType, pIndex):#se define cada boton con dos imagenes y las coordenadas
+        self.instances.append(self)
+        self.pics=pics
+        self.cant=cant
+        self.pos=0
+        self.state=False
+        self.type = pType
+        self.index = pIndex
+        self.basic_pic=pics[self.pos] #se define una imagen bacica qie inicia como la no seleccionada
+        self.rect=self.basic_pic.get_rect()
+  
+    def put(self,screen,x,y):
+        self.rect=self.basic_pic.get_rect()
+        self.rect.center=(x,y)
+        screen.blit(self.basic_pic,self.rect)
+
+    def update(self,screen,cursor):
         if(self.type == 3 or self.type == 4):
             if (self.pos>=self.cant):
                 self.pos=0
             else:
                 self.pos=self.pos+1
+        if((self.type == 0 or self.type == 1) and (not self.state)):
+            if(cursor.colliderect(self.rect)):
+                self.pos = 1
+            else: 
+                self.pos = 0
+        if((self.type == 0 or self.type == 1) and (self.state)):
+            self.pos = 0
         self.basic_pic=self.pics[self.pos]
         screen.blit(self.basic_pic,self.rect)
 
