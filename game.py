@@ -40,27 +40,20 @@ def main():
 
     x=0
     y=0
+    p1.put(screen,x,y)
+    
+    
     while True:
         screen.blit(wallp,(0,0))
-        p1.put(screen,x,y)
         myCursor.update()
-        
+        p1.move(screen, myCursor)
         events=pygame.event.get()
         for event in events:
-            if event.type == pygame.KEYDOWN:
-                if event.key==K_DOWN:
-                    y=y+100
-                    p1.put(screen,x,y)
-                if event.key==K_UP:
-                    y=y-100
-                    p1.put(screen,x,y)
-                if event.key==K_LEFT:
-                    x=x-100
-                    p1.put(screen,x,y)
-                if event.key==K_RIGHT:
-                    x=x+100
-                    p1.put(screen,x,y)
-
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                for obj in objects.instances:
+                    if myCursor.colliderect(obj.rect):
+                        obj.state= not obj.state
+            
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
